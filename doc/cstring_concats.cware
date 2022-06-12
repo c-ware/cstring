@@ -1,0 +1,55 @@
+.TH "cstring_concats" "cware" "June 12, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_concats - concatenate a c-style string to a cstring
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBvoid cstring_concats(struct CString *\fIcstring\fB, const char *\fIstring\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Concatenate a C-style string onto a cstring.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    cstring is NULL
+.br
+o    string is NULL
+.br
+.RE
+
+\fIcstring\fR will be the cstring to write to
+.br
+\fIstring\fR will be the string to concatenate
+.br
+.SH RETURN VALUE
+This function has no return value.
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    struct CString string_a = cstring_init("foo");
+.br
+
+.br
+    cstring_concats(string_a, "bar");
+.br
+
+.br
+    cstring_free(string_a);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+This function has no references.

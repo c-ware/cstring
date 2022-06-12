@@ -7,7 +7,6 @@
 #include <assert.h>
 
 #include "../src/cstring.h"
-#include "../src/cstring_internal.h"
 
 #define GET_TEST_ASSET(path) \
     "./tests/test_assets/" path

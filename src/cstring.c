@@ -6,7 +6,6 @@
 #include <string.h>
 
 #include "cstring.h"
-#include "cstring_internal.h"
 
 /* Memory focused operations */
 
@@ -21,6 +20,7 @@ struct CString cstring_init(const char *body) {
     cstring.capacity = body_length + 1;
     cstring.contents = malloc(body_length + 1);
 
+    cstring.contents[0] = '\0';
     strncat(cstring.contents, body, body_length);
     cstring.contents[body_length] = '\0';
 
@@ -61,9 +61,14 @@ void cstring_concat(struct CString *cstring_a, struct CString cstring_b) {
     if(cstring_b.length == 0)
         return;
 
-    /* Resize buffer first */
     new_length = cstring_a->length + cstring_b.length;
-    cstring_a->contents = realloc(cstring_a->contents, new_length + 1);
+
+    /* Resize buffer first if the new length is above the old length.
+     * This would be a factor in a situation where the string was
+     * reset, and then we concatenate to the reset string. This is
+     * essentially so we do not shrink the string. */
+    if(new_length > cstring_a->length)
+        cstring_a->contents = realloc(cstring_a->contents, new_length + 1);
 
     for(index = 0; index < cstring_b.length; index++) {
         cstring_a->contents[cstring_a->length + index] = cstring_b.contents[index];
@@ -73,6 +78,51 @@ void cstring_concat(struct CString *cstring_a, struct CString cstring_b) {
     cstring_a->contents[cstring_a->length + index] = '\0';
     cstring_a->length = new_length;
     cstring_a->capacity = new_length + 1;
+}
+
+void cstring_concats(struct CString *cstring, const char *string) {
+    struct CString new_string;
+
+    /* We cast away const here because the contents field of new_string,
+     * which will be the string argument, is not modified in the context
+     * of a concatenation. However, it is still not modified, so we cast
+     * it away. That being said, casting away const here is.. less than
+     * optimal. It will definitely raise a few eyebrows. */
+    new_string.length = strlen(string);
+    new_string.capacity = strlen(string) + 1;
+    new_string.contents = (char *) string;
+
+    cstring_concat(cstring, new_string);
+}
+
+int cstring_find(struct CString haystack, struct CString needle) {
+    int index = 0;
+
+    liberror_is_negative(cstring_find, haystack.length);
+    liberror_is_negative(cstring_find, needle.length);
+    liberror_is_null(cstring_find, cstring_string(haystack));
+    liberror_is_null(cstring_find, cstring_string(needle));
+
+    for(index = 0; index < haystack.length; index++) {
+        int cursor = 0;
+
+        for(cursor = 0; cursor < needle.length; cursor++) {
+            if(cstring_string(haystack)[index + cursor] == cstring_string(needle)[cursor])
+                continue;
+
+            /* Premature ending-- cursor will not be equal to cstring_b.length,
+             * which will signal that this is NOT a match */
+            break;
+        }
+
+        /* Signals an icorrect match */
+        if(cursor != needle.length)
+            continue;
+
+        return index;
+    }
+
+    return CSTRING_NOT_FOUND;
 }
 
 /* Less general purpose operations */
@@ -87,7 +137,7 @@ struct CString cstring_loadf(FILE *file) {
 
     /* Prepare the buffer and cstring */
     cstring.contents = malloc(sizeof(char) * (length + 1));
-    cstring.contents[length + 1] = '\0';
+    cstring.contents[length] = '\0';
     cstring.length = length;
     cstring.capacity = length + 1;
 

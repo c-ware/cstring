@@ -1,0 +1,35 @@
+.TH "cstring_find" "cware" "June 12, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_find - find a cstring inside of another cstring
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBint cstring_find(void);
+.br
+
+\fR
+.SH DESCRIPTION
+Determine the location of a needle in a haystack.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    haystack.contents is NULL
+.br
+o    needle.contents is NULL
+.br
+o    haystack.length is negative
+.br
+o    needle.length is negative
+.br
+.RE
+
+This function has no parameters.
+.SH RETURN VALUE
+This function will return the location of first character of needle, or CSTRING_NOT_FOUND
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+This function has no examples.
+.SH SEE ALSO
+This function has no references.

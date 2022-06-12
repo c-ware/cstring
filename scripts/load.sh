@@ -13,10 +13,5 @@ docgen functions ./src/cstring.h --section cware             \
                                 --title 'C-Ware Manuals'     \
                                 --date "`date +'%B %d, %Y'`"
 
-docgen functions ./src/cstring_internal.h --section cware              \
-                                          --format manpage             \
-                                          --title 'C-Ware Manuals'     \
-                                          --date "`date +'%B %d, %Y'`"
-
 makegen library unix --name libcstring \
                      --cflags '\-fpic' > Makefile

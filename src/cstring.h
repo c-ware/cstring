@@ -25,6 +25,18 @@
 
 #include "liberror/liberror.h"
 
+#define CSTRING_NOT_FOUND   -1
+
+/*
+ * @docgen: macro_function
+ * @brief: get the string from the cstring
+ * @name: cstring_string
+ *
+ * @param cstring: the cstring to get the string component of
+*/
+#define cstring_string(cstring) \
+    (cstring).contents
+
 /*
  * @docgen: structure
  * @brief: a dynamically allocated string
@@ -209,7 +221,62 @@ void cstring_concat(struct CString *cstring_a, struct CString cstring_b);
 
 
 
+/*
+ * @docgen: function
+ * @brief: concatenate a c-style string to a cstring
+ * @name: cstring_concats
+ *
+ * @include: cstring.h
+ *
+ * @description
+ * @Concatenate a C-style string onto a cstring.
+ * @description
+ *
+ * @example
+ * @#include "cstring.h"
+ * @
+ * @int main(void) {
+ * @    struct CString string_a = cstring_init("foo");
+ * @
+ * @    cstring_concats(string_a, "bar");
+ * @
+ * @    cstring_free(string_a);
+ * @
+ * @    return 0;
+ * @}
+ * @example
+ *
+ * @error: cstring is NULL
+ * @error: string is NULL
+ *
+ * @param cstring: the cstring to write to
+ * @type: struct CString *
+ *
+ * @param string: the string to concatenate
+ * @type: const char *
+*/
+void cstring_concats(struct CString *cstring, const char *string);
 
+/*
+ * @docgen: function
+ * @brief: find a cstring inside of another cstring
+ * @name: cstring_find
+ *
+ * @include: cstring.h
+ *
+ * @description
+ * @Determine the location of a needle in a haystack.
+ * @description
+ *
+ * @error: haystack.contents is NULL
+ * @error: needle.contents is NULL
+ * @error: haystack.length is negative
+ * @error: needle.length is negative
+ *
+ * @return: the location of first character of needle, or CSTRING_NOT_FOUND
+ * @type: int
+*/
+int cstring_find(struct CString haystack, struct CString needle);
 
 /*
  * @docgen: function
