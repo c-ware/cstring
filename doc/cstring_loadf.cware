@@ -1,0 +1,49 @@
+.TH "cstring_loadf" "cware" "June 12, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_loadf - load a file into a cstring
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBstruct CString cstring_loadf(FILE *\fIfile\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Loads the contents of a file into a NUL-terminated cstring.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    file is NULL
+.br
+.RE
+
+\fIfile\fR will be the file to load
+.br
+.SH RETURN VALUE
+This function will return a new cstring
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    // Load the stdin into a file
+.br
+    struct CString string_a = cstring_loadf(stdin);
+.br
+
+.br
+    cstring_free(string_b);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+This function has no references.

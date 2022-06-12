@@ -1,0 +1,49 @@
+.TH "cstring_init" "cware" "June 12, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_init - initialize a new cstring
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBstruct CString cstring_init(const char *\fIbase\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Initialize a new cstring with a base string in the body of the cstring.
+If an empty cstring is desired, then base should be an empty string.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    base is NULL
+.br
+.RE
+
+\fIbase\fR will be the base string to use as the body
+.br
+.SH RETURN VALUE
+This function will return a new cstring
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    struct CString new_string = cstring_init("basic body");
+.br
+
+.br
+    cstring_free(new_string);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+\fBcware\fR(cware), \fBcstring\fR(cware)
+.br

@@ -1,0 +1,66 @@
+.TH "cstring_reset" "cware" "June 12, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_reset - reset a string to be reused
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBvoid cstring_reset(struct CString \fIcstring\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Reset the length of the string and NUL terminate the beginning of it
+to 'reset' the string. Note that this does not actually erase or reset
+the physical contents of the buffers-- only makes the accessible parts
+of the buffer seem to be reset.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    cstring is NULL
+.br
+o    cstring->contents NULL
+.br
+o    cstring->length is negative
+.br
+.RE
+
+\fIcstring\fR will be the cstring to reset
+.br
+.SH RETURN VALUE
+This function has no return value.
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    struct CString string_a = cstring_init("foo");
+.br
+    struct CString string_b = cstring_init("bar");
+.br
+
+.br
+    // Concatenate, then reset string_a
+.br
+    cstring_concat(string_a, string_b);
+.br
+    cstring_reset(&string_a);
+.br
+
+.br
+    cstring_free(string_a);
+.br
+    cstring_free(string_b);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+This function has no references.

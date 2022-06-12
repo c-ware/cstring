@@ -1,0 +1,49 @@
+.TH "cstring" "cware" "June 12, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring - ansi c compliant dynamically allocated string
+.SH SYNOPSIS
+
+.br
+
+
+.br
+
+.br
+/* a dynamically allocated string */
+.br
+struct CString {
+.br
+.RS  0.4i
+.br
+int length;     /* the length of the string */
+.br
+int capacity;   /* the physical capacity of the string */
+.br
+char *contents; /* the characters in the string */
+.br
+.RE
+.br
+};
+.br
+
+.br
+
+.br
+
+.br
+
+.br
+.SH DESCRIPTION
+An ANSI C compliant dynamically allocated string implementation with a
+focus on efficient use of memory. One of the main design choices of cstring 
+is to put emphesis on the reuse of existing string objects to reduce overall
+memory usage.
+
+Another important design choice of cstring is to provide some degree of
+interopability between a cstring, and a C-style string. To achieve this,
+cstrings are NUL terminated, while also having a length field for any
+situations where the programmer may want length-prefixed strings, such as
+constant time length operations, and the need for the NUL byte in the body
+of the string.
+.SH SEE ALSO
+This project has no references.

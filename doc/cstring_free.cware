@@ -1,0 +1,50 @@
+.TH "cstring_free" "cware" "June 12, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_free - release a cstring from memory
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBvoid cstring_free(struct CString \fIcstring\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Releases a cstring from memory. Since the cstring structure is most
+likely going to be on the stack, only the body of the string must be
+released.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    cstring.contents is NULL
+.br
+.RE
+
+\fIcstring\fR will be the cstring to free
+.br
+.SH RETURN VALUE
+This function has no return value.
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    struct CString new_string = cstring_init("basic body");
+.br
+
+.br
+    cstring_free(new_string);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+\fBcware\fR(cware), \fBcstring\fR(cware)
+.br

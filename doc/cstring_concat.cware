@@ -1,0 +1,69 @@
+.TH "cstring_concat" "cware" "June 12, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_concat - concatenate two strings
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBvoid cstring_concat(struct CString *\fIcstring_a\fB, struct CString \fIcstring_b\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Concatenates string_a into string_b, modifying string_a in-place.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    cstring_a is NULL
+.br
+o    cstring_a->contents is NULL
+.br
+o    cstring_b.contents is NULL
+.br
+o    cstring_a->length is negative
+.br
+o    cstring_b.length is negative
+.br
+o    cstring_a->capacity is negative
+.br
+o    cstring_b.capacity is negative
+.br
+.RE
+
+\fIcstring_a\fR will be the cstring to write into
+.br
+\fIcstring_b\fR will be the cstring to write
+.br
+.SH RETURN VALUE
+This function has no return value.
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    struct CString string_a = cstring_init("foo");
+.br
+    struct CString string_b = cstring_init("bar");
+.br
+
+.br
+    cstring_concat(string_a, string_b);
+.br
+
+.br
+    cstring_free(string_a);
+.br
+    cstring_free(string_b);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+This function has no references.
