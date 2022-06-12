@@ -21,9 +21,7 @@ struct CString cstring_init(const char *body) {
     cstring.capacity = body_length + 1;
     cstring.contents = malloc(body_length + 1);
 
-    /* It is safe to use strcat here because the buffer
-     * is guaranteed to be big enough. */
-    strcat(cstring.contents, body);
+    strncat(cstring.contents, body, body_length);
     cstring.contents[body_length] = '\0';
 
     return cstring;

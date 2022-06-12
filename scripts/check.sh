@@ -10,6 +10,10 @@ if [ ! -d tests ]; then
 fi
 
 for test_file in tests/*; do
+    if [ -d $test_file ]; then
+        continue
+    fi
+
     if [ ! -x $test_file ]; then
         continue
     fi

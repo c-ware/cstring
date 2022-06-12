@@ -1,5 +1,5 @@
 OBJS=./src/cstring.o ./src/cstring_internal.o 
-TESTS=./tests/concat ./tests/init 
+TESTS=./tests/loadf ./tests/concat ./tests/init 
 HEADERS=./src/cstring.h ./src/cstring_internal.h ./src/liberror/liberror.h 
 CC=cc
 PREFIX=/usr/local
@@ -25,6 +25,9 @@ install:
 uninstall:
 	rm -rf $(PREFIX)/include/libcstring
 	rm -f $(PREFIX)/lib/libcstring.so
+
+./tests/loadf: ./tests/loadf.c ./tests/common.h $(OBJS)
+	$(CC) ./tests/loadf.c -o ./tests/loadf $(OBJS) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
 
 ./tests/concat: ./tests/concat.c ./tests/common.h $(OBJS)
 	$(CC) ./tests/concat.c -o ./tests/concat $(OBJS) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
