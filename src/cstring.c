@@ -77,22 +77,23 @@ void cstring_concat(struct CString *cstring_a, struct CString cstring_b) {
 
 /* Less general purpose operations */
 struct CString cstring_loadf(FILE *file) {
-    int written = 0;
-    char buffer[512 + 1];
+    int length = 0;
     struct CString cstring;
 
     liberror_is_null(cstring_loadf, file);
-    cstring = cstring_init("");
 
-    while((written = fread(buffer, 1, 512, file)) == 512) {
-        struct CString appender;
+    fseek(file, 0, SEEK_END);
+    length = ftell(file);
 
-        appender.length = written;
-        appender.capacity = written + 1;
-        appender.contents = buffer;
+    /* Prepare the buffer and cstring */
+    cstring.contents = malloc(sizeof(char) * (length + 1));
+    cstring.contents[length + 1] = '\0';
+    cstring.length = length;
+    cstring.capacity = length + 1;
 
-        cstring_concat(&cstring, appender);
-    }
-
+    /* Load the file */
+    rewind(file);
+    fread(cstring.contents, 1, length, file);
+    
     return cstring;
 }
