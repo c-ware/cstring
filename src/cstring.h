@@ -57,7 +57,6 @@ struct CString {
     char *contents;
 };
 
-
 /*
  * @docgen: function
  * @brief: initialize a new cstring
@@ -213,13 +212,6 @@ void cstring_reset(struct CString *cstring);
  * @type: struct CString
 */
 void cstring_concat(struct CString *cstring_a, struct CString cstring_b);
-
-
-
-
-
-
-
 
 /*
  * @docgen: function
@@ -442,6 +434,99 @@ int cstring_startswiths(struct CString cstring, const char *check);
 
 /*
  * @docgen: function
+ * @brief: determine if a cstring ends with another cstring
+ * @name: cstring_endswith
+ *
+ * @include: cstring.h
+ *
+ * @description
+ * @Determine if a CString ends with another CString.
+ * @description
+ *
+ * @example
+ * @#include <stdio.h>
+ * @
+ * @#include "cstring.h"
+ * @
+ * @int main(void) {
+ * @    struct CString string_a = cstring_init("foo bar baz");
+ * @    struct CString string_b = cstring_init("baz");
+ * @
+ * @    if(cstring_endswith(string_a, string_b) == 1)
+ * @        printf("%s", "string_a ends with string_b\n");
+ * @    else
+ * @        printf("%s", "string_a does not end with string_b\n");
+ * @
+ * @    cstring_free(string_a);
+ * @    cstring_free(string_b);
+ * @
+ * @    return 0;
+ * @}
+ * @example
+ *
+ * @error: cstring.contents is NULL
+ * @error: check.contents is NULL
+ * @error: cstring.length is negative
+ * @error: check.length is negative
+ *
+ * @param cstring: the cstring to check
+ * @type: struct CString
+ *
+ * @param check: the cstring to check for
+ * @type: struct CString
+ *
+ * @return: 1 if cstring ends with check, 0 if it does not
+ * @type: int
+*/
+int cstring_endswith(struct CString cstring, struct CString check);
+
+/*
+ * @docgen: function
+ * @brief: determine if a cstring ends with a C-style string
+ * @name: cstring_endswiths
+ *
+ * @include: cstring.h
+ *
+ * @description
+ * @Determine if a CString ends with a C-style string
+ * @description
+ *
+ * @example
+ * @#include <stdio.h>
+ * @
+ * @#include "cstring.h"
+ * @
+ * @int main(void) {
+ * @    struct CString string_a = cstring_init("foo bar baz");
+ * @
+ * @    if(cstring_endswiths(string_a, "baz") == 1)
+ * @        printf("%s", "string_a ends with 'baz'\n");
+ * @    else
+ * @        printf("%s", "string_a does not end with 'baz'\n");
+ * @
+ * @    cstring_free(string_a);
+ * @
+ * @    return 0;
+ * @}
+ * @example
+ *
+ * @error: cstring.contents is NULL
+ * @error: check is NULL
+ * @error: cstring.length is negative
+ *
+ * @param cstring: the cstring to check
+ * @type: struct CString
+ *
+ * @param check: the c-style to check for
+ * @type: const char *
+ *
+ * @return: 1 if cstring ends with check, 0 if it does not
+ * @type: int
+*/
+int cstring_endswiths(struct CString cstring, const char *check);
+
+/*
+ * @docgen: function
  * @brief: load a file into a cstring
  * @name: cstring_loadf
  *
@@ -475,15 +560,5 @@ int cstring_startswiths(struct CString cstring, const char *check);
  * @type: struct CString
 */
 struct CString cstring_loadf(FILE *file);
-
-
-
-
-
-
-
-
-
-
 
 #endif

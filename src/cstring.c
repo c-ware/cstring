@@ -184,6 +184,45 @@ int cstring_startswiths(struct CString cstring, const char *check) {
     return cstring_startswith(cstring, cstring_check);
 }
 
+int cstring_endswith(struct CString cstring, struct CString check) {
+    int index = 0;
+    int cursor = 0;
+
+    liberror_is_null(cstring_endswith, cstring.contents);
+    liberror_is_null(cstring_endswith, check.contents);
+    liberror_is_negative(cstring_endswith, cstring.length);
+    liberror_is_negative(cstring_endswith, check.length);
+
+    /* Check cannot be inside of a larger string than it */
+    if(check.length > cstring.length)
+        return 0;
+
+    for(index = cstring.length - check.length; index < cstring.length; index++) {
+        if(cstring_string(cstring)[index] != cstring_string(check)[cursor])
+            return 0;
+
+        cursor++;
+    }
+
+
+    return 1;
+}
+
+int cstring_endswiths(struct CString cstring, const char *check) {
+    int index = 0;
+    struct CString cstring_check;
+
+    liberror_is_null(cstring_endswiths, cstring_string(cstring));
+    liberror_is_null(cstring_endswiths, check);
+    liberror_is_negative(cstring_endswiths, cstring.length);
+
+    cstring_check.length = strlen(check);
+    cstring_check.capacity = strlen(check) + 1;
+    cstring_check.contents = (char *) check;
+
+    return cstring_endswith(cstring, cstring_check);
+}
+
 /* Less general purpose operations */
 struct CString cstring_loadf(FILE *file) {
     int length = 0;

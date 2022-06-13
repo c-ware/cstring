@@ -10,7 +10,9 @@ cstring_loadf - load a file into a cstring
 
 \fR
 .SH DESCRIPTION
-Loads the contents of a file into a NUL-terminated cstring.
+Loads the contents of a file into a NUL-terminated cstring. Do note, that
+this function will NOT work on streams. So, this will not work on stdin,
+for example.
 
 This function will display an error to the stderr, and abort the program if any of following conditions are met.
 .RS
@@ -31,13 +33,13 @@ This function has no notes.
 .br
 int main(void) {
 .br
-    // Load the stdin into a file
+    // Load a file into a string
 .br
-    struct CString string_a = cstring_loadf(stdin);
+    struct CString string_a = cstring_loadf("./file.txt");
 .br
 
 .br
-    cstring_free(string_b);
+    cstring_free(string_a);
 .br
 
 .br

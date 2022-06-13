@@ -1,0 +1,67 @@
+.TH "cstring_endswiths" "cware" "June 13, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_endswiths - determine if a cstring ends with a C-style string
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBint cstring_endswiths(struct CString \fIcstring\fB, const char *\fIcheck\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Determine if a CString ends with a C-style string
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    cstring.contents is NULL
+.br
+o    check is NULL
+.br
+o    cstring.length is negative
+.br
+.RE
+
+\fIcstring\fR will be the cstring to check
+.br
+\fIcheck\fR will be the c-style to check for
+.br
+.SH RETURN VALUE
+This function will return 1 if cstring ends with check, 0 if it does not
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include <stdio.h>
+.br
+
+.br
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    struct CString string_a = cstring_init("foo bar baz");
+.br
+
+.br
+    if(cstring_endswiths(string_a, "baz") == 1)
+.br
+        printf("%s", "string_a ends with 'baz'\n");
+.br
+    else
+.br
+        printf("%s", "string_a does not end with 'baz'\n");
+.br
+
+.br
+    cstring_free(string_a);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+This function has no references.
