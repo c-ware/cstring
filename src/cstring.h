@@ -448,17 +448,19 @@ int cstring_startswiths(struct CString cstring, const char *check);
  * @include: cstring.h
  *
  * @description
- * @Loads the contents of a file into a NUL-terminated cstring.
+ * @Loads the contents of a file into a NUL-terminated cstring. Do note, that
+ * @this function will NOT work on streams. So, this will not work on stdin,
+ * @for example.
  * @description
  *
  * @example
  * @#include "cstring.h"
  * @
  * @int main(void) {
- * @    // Load the stdin into a file
- * @    struct CString string_a = cstring_loadf(stdin);
+ * @    // Load a file into a string
+ * @    struct CString string_a = cstring_loadf("./file.txt");
  * @
- * @    cstring_free(string_b);
+ * @    cstring_free(string_a);
  * @
  * @    return 0;
  * @}
