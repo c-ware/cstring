@@ -1,32 +1,31 @@
-.TH "cstring_find" "cware" "June 13, 2022" "" "C-Ware Manuals"
+.TH "cstring_finds" "cware" "June 13, 2022" "" "C-Ware Manuals"
 .SH NAME
-cstring_find - find a cstring inside of another cstring
+cstring_finds - find a c-style string inside of a cstring
 .SH SYNOPSIS
 .B "#include ""cstring.h"""
 .br
 
-\fBint cstring_find(struct CString \fIhaystack\fB, struct CString \fIneedle\fB);
+\fBint cstring_finds(struct CString \fIhaystack\fB, const char *\fIneedle\fB);
 .br
 
 \fR
 .SH DESCRIPTION
-Determine the location of a needle in a haystack.
+Determine the location of a needle in a haystack, where the needle is a
+C-style string as opposed to a CString, and the haystack is a CString.
 
 This function will display an error to the stderr, and abort the program if any of following conditions are met.
 .RS
 o    haystack.contents is NULL
 .br
-o    needle.contents is NULL
-.br
 o    haystack.length is negative
 .br
-o    needle.length is negative
+o    needle is NULL
 .br
 .RE
 
 \fIhaystack\fR will be the cstring to search through
 .br
-\fIneedle\fR will be the cstring to find in the haystack
+\fIneedle\fR will be the c-style string to find in the haystack
 .br
 .SH RETURN VALUE
 This function will return the location of first character of needle, or CSTRING_NOT_FOUND
@@ -45,17 +44,13 @@ int main(void) {
 .br
     struct CString string_a = cstring_init("foo bar baz");
 .br
-    struct CString string_b = cstring_init("bar");
-.br
 
 .br
-    printf("Location of 'bar': %i\n", cstring_find(string_a, string_b));
+    printf("Location of 'bar': %i\n", cstring_finds(string_a, "bar"));
 .br
 
 .br
     cstring_free(string_a);
-.br
-    cstring_free(string_b);
 .br
 
 .br

@@ -1,0 +1,68 @@
+.TH "cstring_startswiths" "cware" "June 13, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_startswiths - determine if a cstring starts with a c-style string
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBint cstring_startswiths(struct CString \fIcstring\fB, const char *\fIcheck\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Determine if a CString starts with a C-style string. In other words, is
+a C-style string the prefix of another CString.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    cstring.contents is NULL
+.br
+o    check is NULL
+.br
+o    cstring.length is negative
+.br
+.RE
+
+\fIcstring\fR will be the cstring to check
+.br
+\fIcheck\fR will be the c-style string to check for
+.br
+.SH RETURN VALUE
+This function will return 1 if cstring starts with check, 0 if it does not
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include <stdio.h>
+.br
+
+.br
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    struct CString string_a = cstring_init("foo bar baz");
+.br
+
+.br
+    if(cstring_startswiths(string_a, "foo") == 1)
+.br
+        printf("%s", "string_a starts with 'foo'\n");
+.br
+    else
+.br
+        printf("%s", "string_a does not start with 'foo'\n");
+.br
+
+.br
+    cstring_free(string_a);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+This function has no references.

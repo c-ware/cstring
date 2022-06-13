@@ -268,15 +268,177 @@ void cstring_concats(struct CString *cstring, const char *string);
  * @Determine the location of a needle in a haystack.
  * @description
  *
+ * @example
+ * @#include <stdio.h>
+ * @
+ * @#include "cstring.h"
+ * @
+ * @int main(void) {
+ * @    struct CString string_a = cstring_init("foo bar baz");
+ * @    struct CString string_b = cstring_init("bar");
+ * @
+ * @    printf("Location of 'bar': %i\n", cstring_find(string_a, string_b));
+ * @
+ * @    cstring_free(string_a);
+ * @    cstring_free(string_b);
+ * @
+ * @    return 0;
+ * @}
+ * @example
+ *
  * @error: haystack.contents is NULL
  * @error: needle.contents is NULL
  * @error: haystack.length is negative
  * @error: needle.length is negative
  *
+ * @param haystack: the cstring to search through
+ * @type: struct CString
+ *
+ * @param needle: the cstring to find in the haystack
+ * @type: struct CString
+ *
  * @return: the location of first character of needle, or CSTRING_NOT_FOUND
  * @type: int
 */
 int cstring_find(struct CString haystack, struct CString needle);
+
+/*
+ * @docgen: function
+ * @brief: find a c-style string inside of a cstring
+ * @name: cstring_finds
+ *
+ * @include: cstring.h
+ *
+ * @description
+ * @Determine the location of a needle in a haystack, where the needle is a
+ * @C-style string as opposed to a CString, and the haystack is a CString.
+ * @description
+ *
+ * @example
+ * @#include <stdio.h>
+ * @
+ * @#include "cstring.h"
+ * @
+ * @int main(void) {
+ * @    struct CString string_a = cstring_init("foo bar baz");
+ * @
+ * @    printf("Location of 'bar': %i\n", cstring_finds(string_a, "bar"));
+ * @
+ * @    cstring_free(string_a);
+ * @
+ * @    return 0;
+ * @}
+ * @example
+ *
+ * @error: haystack.contents is NULL
+ * @error: haystack.length is negative
+ * @error: needle is NULL
+ *
+ * @param haystack: the cstring to search through
+ * @type: struct CString
+ *
+ * @param needle: the c-style string to find in the haystack
+ * @type: const char *
+ *
+ * @return: the location of first character of needle, or CSTRING_NOT_FOUND
+ * @type: int
+*/
+int cstring_finds(struct CString haystack, const char *needle);
+
+/*
+ * @docgen: function
+ * @brief: determine if a cstring starts with another cstring
+ * @name: cstring_startswith
+ *
+ * @include: cstring.h
+ *
+ * @description
+ * @Determine if a CString starts with another CString. In other words, is
+ * @a CString the prefix of another CString.
+ * @description
+ *
+ * @example
+ * @#include <stdio.h>
+ * @
+ * @#include "cstring.h"
+ * @
+ * @int main(void) {
+ * @    struct CString string_a = cstring_init("foo bar baz");
+ * @    struct CString string_b = cstring_init("foo");
+ * @
+ * @    if(cstring_startswith(string_a, string_b) == 1)
+ * @        printf("%s", "string_a starts with string_b\n");
+ * @    else
+ * @        printf("%s", "string_a does not start with string_b\n");
+ * @
+ * @    cstring_free(string_a);
+ * @    cstring_free(string_b);
+ * @
+ * @    return 0;
+ * @}
+ * @example
+ *
+ * @error: cstring.contents is NULL
+ * @error: check.contents is NULL
+ * @error: cstring.length is negative
+ * @error: check.length is negative
+ *
+ * @param cstring: the cstring to check
+ * @type: struct CString
+ *
+ * @param check: the cstring to check for
+ * @type: struct CString
+ *
+ * @return: 1 if cstring starts with check, 0 if it does not
+ * @type: int
+*/
+int cstring_startswith(struct CString cstring, struct CString check);
+
+/*
+ * @docgen: function
+ * @brief: determine if a cstring starts with a c-style string
+ * @name: cstring_startswiths
+ *
+ * @include: cstring.h
+ *
+ * @description
+ * @Determine if a CString starts with a C-style string. In other words, is
+ * @a C-style string the prefix of another CString.
+ * @description
+ *
+ * @example
+ * @#include <stdio.h>
+ * @
+ * @#include "cstring.h"
+ * @
+ * @int main(void) {
+ * @    struct CString string_a = cstring_init("foo bar baz");
+ * @
+ * @    if(cstring_startswiths(string_a, "foo") == 1)
+ * @        printf("%s", "string_a starts with 'foo'\n");
+ * @    else
+ * @        printf("%s", "string_a does not start with 'foo'\n");
+ * @
+ * @    cstring_free(string_a);
+ * @
+ * @    return 0;
+ * @}
+ * @example
+ *
+ * @error: cstring.contents is NULL
+ * @error: check is NULL
+ * @error: cstring.length is negative
+ *
+ * @param cstring: the cstring to check
+ * @type: struct CString
+ *
+ * @param check: the c-style string to check for
+ * @type: const char *
+ *
+ * @return: 1 if cstring starts with check, 0 if it does not
+ * @type: int
+*/
+int cstring_startswiths(struct CString cstring, const char *check);
 
 /*
  * @docgen: function

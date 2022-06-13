@@ -95,6 +95,7 @@ void cstring_concats(struct CString *cstring, const char *string) {
     cstring_concat(cstring, new_string);
 }
 
+/* Searching / condition based operations */
 int cstring_find(struct CString haystack, struct CString needle) {
     int index = 0;
 
@@ -123,6 +124,57 @@ int cstring_find(struct CString haystack, struct CString needle) {
     }
 
     return CSTRING_NOT_FOUND;
+}
+
+int cstring_finds(struct CString haystack, const char *needle) {
+    struct CString cstring;
+
+    liberror_is_null(cstring_finds, cstring_string(haystack));
+    liberror_is_null(cstring_finds, needle);
+    liberror_is_negative(cstring_finds, haystack.length);
+
+    cstring.length = strlen(needle);
+    cstring.capacity = strlen(needle) + 1;
+    cstring.contents = (char *) needle;
+
+    return cstring_find(haystack, cstring);
+}
+
+int cstring_startswith(struct CString cstring, struct CString check) {
+    int index = 0;
+
+    liberror_is_null(cstring_startswith, cstring_string(cstring));
+    liberror_is_null(cstring_startswith, cstring_string(check));
+    liberror_is_negative(cstring_startswith, cstring.length);
+    liberror_is_negative(cstring_startswith, check.length);
+
+    /* Check cannot be inside of a larger string than it */
+    if(check.length > cstring.length)
+        return 0;
+
+    for(index = 0; index < check.length; index++) {
+        if(cstring_string(cstring)[index] == cstring_string(check)[index])
+            continue;
+
+        return 0;
+    }
+
+    return 1;
+}
+
+int cstring_startswiths(struct CString cstring, const char *check) {
+    int index = 0;
+    struct CString cstring_check;
+
+    liberror_is_null(cstring_startswiths, cstring_string(cstring));
+    liberror_is_null(cstring_startswiths, check);
+    liberror_is_negative(cstring_startswiths, cstring.length);
+
+    cstring_check.length = strlen(check);
+    cstring_check.capacity = strlen(check) + 1;
+    cstring_check.contents = (char *) check;
+
+    return cstring_startswith(cstring, cstring_check);
 }
 
 /* Less general purpose operations */

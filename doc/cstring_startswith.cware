@@ -1,0 +1,74 @@
+.TH "cstring_startswith" "cware" "June 13, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_startswith - determine if a cstring starts with another cstring
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBint cstring_startswith(struct CString \fIcstring\fB, struct CString \fIcheck\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Determine if a CString starts with another CString. In other words, is
+a CString the prefix of another CString.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    cstring.contents is NULL
+.br
+o    check.contents is NULL
+.br
+o    cstring.length is negative
+.br
+o    check.length is negative
+.br
+.RE
+
+\fIcstring\fR will be the cstring to check
+.br
+\fIcheck\fR will be the cstring to check for
+.br
+.SH RETURN VALUE
+This function will return 1 if cstring starts with check, 0 if it does not
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include <stdio.h>
+.br
+
+.br
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    struct CString string_a = cstring_init("foo bar baz");
+.br
+    struct CString string_b = cstring_init("foo");
+.br
+
+.br
+    if(cstring_startswith(string_a, string_b) == 1)
+.br
+        printf("%s", "string_a starts with string_b\n");
+.br
+    else
+.br
+        printf("%s", "string_a does not start with string_b\n");
+.br
+
+.br
+    cstring_free(string_a);
+.br
+    cstring_free(string_b);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+This function has no references.

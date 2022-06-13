@@ -1,4 +1,4 @@
-.TH "cstring_free" "cware" "June 12, 2022" "" "C-Ware Manuals"
+.TH "cstring_free" "cware" "June 13, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring_free - release a cstring from memory
 .SH SYNOPSIS

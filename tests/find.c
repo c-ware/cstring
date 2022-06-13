@@ -12,6 +12,9 @@ int main(void) {
     assert(cstring_find(string_a, string_b) == 8);
     assert(cstring_find(string_a, string_c) == 0);
     assert(cstring_find(string_c, string_b) == CSTRING_NOT_FOUND);
+    assert(cstring_find(string_b, string_c) == 0);
+    assert(cstring_find(string_a, string_a) == 0);
+    assert(cstring_find(string_b, string_a) == CSTRING_NOT_FOUND);
 
     cstring_free(string_a);
     cstring_free(string_b);

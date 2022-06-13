@@ -1,4 +1,4 @@
-.TH "cstring_concats" "cware" "June 12, 2022" "" "C-Ware Manuals"
+.TH "cstring_concats" "cware" "June 13, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring_concats - concatenate a c-style string to a cstring
 .SH SYNOPSIS
