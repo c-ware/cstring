@@ -527,6 +527,55 @@ int cstring_endswiths(struct CString cstring, const char *check);
 
 /*
  * @docgen: function
+ * @brief: strip all occurrences of a cstring from another cstring
+ * @name: cstring_strip
+ *
+ * @include: cstring.h
+ *
+ * @description
+ * @Remove all occurrences of a cstring from another cstring.
+ * @This is an in-place operation, and thus will modify the
+ * @cstring.
+ * @description
+ *
+ * @example
+ * @#include <stdio.h>
+ * @
+ * @#include "cstring.h"
+ * @
+ * @int main(void) {
+ * @    struct CString string_a = cstring_init("foo bar baz");
+ * @    struct CString string_b = cstring_init(" ");
+ * @
+ * @    // Strip all occurrences of a space from the string
+ * @    printf("Removed %i occurrences of ' '\n", cstring_split(&string_a, string_b));
+ * @
+ * @    cstring_free(string_a);
+ * @    cstring_free(string_b);
+ * @
+ * @    return 0;
+ * @}
+ * @example
+ *
+ * @error: cstring is NULL
+ * @error: cstring->contents is NULL
+ * @error: target.contents is NULL
+ * @error: cstring->length is negative
+ * @error: target.length is negative
+ *
+ * @param cstring: the cstring to strip from
+ * @type: struct CString *
+ *
+ * @param target: the cstring to remove from cstring
+ * @type: struct CString
+ *
+ * @return: the number of strips performed
+ * @type: int
+*/
+int cstring_strip(struct CString *cstring, struct CString target);
+
+/*
+ * @docgen: function
  * @brief: load a file into a cstring
  * @name: cstring_loadf
  *

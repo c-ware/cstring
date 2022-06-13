@@ -1,0 +1,73 @@
+.TH "cstring_strip" "cware" "June 13, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_strip - strip all occurrences of a cstring from another cstring
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBint cstring_strip(struct CString *\fIcstring\fB, struct CString \fItarget\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Remove all occurrences of a cstring from another cstring.
+This is an in-place operation, and thus will modify the
+cstring.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    cstring is NULL
+.br
+o    cstring->contents is NULL
+.br
+o    target.contents is NULL
+.br
+o    cstring->length is negative
+.br
+o    target.length is negative
+.br
+.RE
+
+\fIcstring\fR will be the cstring to strip from
+.br
+\fItarget\fR will be the cstring to remove from cstring
+.br
+.SH RETURN VALUE
+This function will return the number of strips performed
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include <stdio.h>
+.br
+
+.br
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    struct CString string_a = cstring_init("foo bar baz");
+.br
+    struct CString string_b = cstring_init(" ");
+.br
+
+.br
+    // Strip all occurrences of a space from the string
+.br
+    printf("Removed %i occurrences of ' '\n", cstring_split(&string_a, string_b));
+.br
+
+.br
+    cstring_free(string_a);
+.br
+    cstring_free(string_b);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+This function has no references.

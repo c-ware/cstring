@@ -102,6 +102,37 @@ void cstring_concats(struct CString *cstring, const char *string) {
     cstring_concat(cstring, new_string);
 }
 
+/* Removal based operations */
+int cstring_strip(struct CString *cstring, struct CString target) {
+    int index = 0;
+    int strips = 0;
+
+    liberror_is_null(cstring_strip, cstring);
+    liberror_is_null(cstring_strip, cstring->contents);
+    liberror_is_null(cstring_strip, target.contents);
+    liberror_is_negative(cstring_strip, cstring->length);
+    liberror_is_negative(cstring_strip, target.length);
+
+    /* A target string cannot be removed from a string that
+     * it is larger than */
+    if(target.length > cstring->length)
+        return 0;
+
+    /* Keep stripping a string from the location its found.
+     * This could be a bit simpler. Maybe having a cursor
+     * and then simply shifting over everything after
+     * index + target.length */
+    while((index = cstring_find(*cstring, target)) != CSTRING_NOT_FOUND) {
+        memmove(cstring->contents + index, cstring->contents + index + target.length, sizeof(char) * (cstring->length - target.length - index));
+        cstring->contents[cstring->length - target.length] = '\0';
+        cstring->length -= target.length;
+
+        strips++;
+    }
+
+    return strips;
+}
+
 /* Searching / condition based operations */
 int cstring_find(struct CString haystack, struct CString needle) {
     int index = 0;
