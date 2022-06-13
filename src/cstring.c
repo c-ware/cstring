@@ -83,6 +83,13 @@ void cstring_concat(struct CString *cstring_a, struct CString cstring_b) {
 void cstring_concats(struct CString *cstring, const char *string) {
     struct CString new_string;
 
+    liberror_is_null(cstring_concats, cstring);
+    liberror_is_null(cstring_concats, cstring_string(*cstring));
+    liberror_is_null(cstring_concats, string);
+
+    liberror_is_negative(cstring_concats, cstring->length);
+    liberror_is_negative(cstring_concats, cstring->capacity);
+
     /* We cast away const here because the contents field of new_string,
      * which will be the string argument, is not modified in the context
      * of a concatenation. However, it is still not modified, so we cast
