@@ -102,6 +102,8 @@ void cstring_concats(struct CString *cstring, const char *string) {
     cstring_concat(cstring, new_string);
 }
 
+/* Statistics related */
+
 /* Removal based operations */
 int cstring_strip(struct CString *cstring, struct CString target) {
     int index = 0;
@@ -131,6 +133,20 @@ int cstring_strip(struct CString *cstring, struct CString target) {
     }
 
     return strips;
+}
+
+int cstring_strips(struct CString *cstring, const char *target) {
+    struct CString cstring_target;
+
+    liberror_is_null(cstring_strips, cstring);
+    liberror_is_null(cstring_strips, target);
+    liberror_is_negative(cstring_strips, cstring->length);
+
+    cstring_target.length = strlen(target);
+    cstring_target.capacity = strlen(target) + 1;
+    cstring_target.contents = (char *) target;
+
+    return cstring_strip(cstring, cstring_target);
 }
 
 /* Searching / condition based operations */

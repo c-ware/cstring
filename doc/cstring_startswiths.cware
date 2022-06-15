@@ -1,4 +1,4 @@
-.TH "cstring_startswiths" "cware" "June 13, 2022" "" "C-Ware Manuals"
+.TH "cstring_startswiths" "cware" "June 15, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring_startswiths - determine if a cstring starts with a c-style string
 .SH SYNOPSIS

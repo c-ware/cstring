@@ -1,18 +1,17 @@
-.TH "cstring_strip" "cware" "June 15, 2022" "" "C-Ware Manuals"
+.TH "cstring_strips" "cware" "June 15, 2022" "" "C-Ware Manuals"
 .SH NAME
-cstring_strip - strip all occurrences of a cstring from another cstring
+cstring_strips - strip all occurrences of a c-style string from a cstring
 .SH SYNOPSIS
 .B "#include ""cstring.h"""
 .br
 
-\fBint cstring_strip(struct CString *\fIcstring\fB, struct CString \fItarget\fB);
+\fBint cstring_strips(struct CString *\fIcstring\fB, struct CString \fItarget\fB);
 .br
 
 \fR
 .SH DESCRIPTION
-Remove all occurrences of a cstring from another cstring.
-This is an in-place operation, and thus will modify the
-cstring.
+Remove all occurrences of a C-style string from a cstring. This
+is an in-place operation, and thus will modify the CString.
 
 This function will display an error to the stderr, and abort the program if any of following conditions are met.
 .RS
@@ -49,19 +48,15 @@ int main(void) {
 .br
     struct CString string_a = cstring_init("foo bar baz");
 .br
-    struct CString string_b = cstring_init(" ");
-.br
 
 .br
     // Strip all occurrences of a space from the string
 .br
-    printf("Removed %i occurrences of ' '\n", cstring_split(&string_a, string_b));
+    printf("Removed %i occurrences of ' '\n", cstring_strips(&string_a, " "));
 .br
 
 .br
     cstring_free(string_a);
-.br
-    cstring_free(string_b);
 .br
 
 .br

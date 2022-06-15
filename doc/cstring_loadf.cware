@@ -1,4 +1,4 @@
-.TH "cstring_loadf" "cware" "June 13, 2022" "" "C-Ware Manuals"
+.TH "cstring_loadf" "cware" "June 15, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring_loadf - load a file into a cstring
 .SH SYNOPSIS

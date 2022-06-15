@@ -1,4 +1,4 @@
-.TH "cstring" "cware" "June 13, 2022" "" "C-Ware Manuals"
+.TH "cstring" "cware" "June 15, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring - ansi c compliant dynamically allocated string
 .SH SYNOPSIS

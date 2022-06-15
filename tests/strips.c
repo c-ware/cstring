@@ -1,5 +1,5 @@
 /*
- * Tests for stripping cstrings from another cstring
+ * Tests for stripping C-style strings from a cstring
 */
 
 #include "common.h"
@@ -11,9 +11,9 @@ int main(void) {
     struct CString string_d = cstring_init("foo bar baz tuna spam");
     struct CString string_e = cstring_init("");
 
-    assert(cstring_strip(&string_a, string_b) == 4);
-    assert(cstring_strip(&string_d, string_c) == 1);
-    assert(cstring_strip(&string_e, string_c) == 0);
+    assert(cstring_strips(&string_a, " ") == 4);
+    assert(cstring_strips(&string_d, "tuna") == 1);
+    assert(cstring_strips(&string_e, "tuna") == 0);
 
     cstring_free(string_a);
     cstring_free(string_b);
