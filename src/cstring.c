@@ -33,15 +33,6 @@ void cstring_free(struct CString cstring) {
     free(cstring.contents);
 }
 
-void cstring_reset(struct CString *cstring) {
-    liberror_is_null(cstring_reset, cstring);
-    liberror_is_null(cstring_reset, cstring->contents);
-    liberror_is_negative(cstring_reset, cstring->length);
-
-    cstring->length = 0;
-    cstring->contents[0] = '\0';
-}
-
 /* Addition based operations */
 void cstring_concat(struct CString *cstring_a, struct CString cstring_b) {
     int index = 0;
@@ -291,4 +282,68 @@ struct CString cstring_loadf(FILE *file) {
     fread(cstring.contents, 1, length, file);
     
     return cstring;
+}
+
+/* Misc. operations */
+void cstring_reset(struct CString *cstring) {
+    liberror_is_null(cstring_reset, cstring);
+    liberror_is_null(cstring_reset, cstring->contents);
+    liberror_is_negative(cstring_reset, cstring->length);
+
+    cstring->length = 0;
+    cstring->contents[0] = '\0';
+}
+
+struct CString cstring_slice(struct CString cstring, int start, int stop) {
+    struct CString slice;
+
+    liberror_is_null(cstring_slice, cstring.contents);
+    liberror_is_negative(cstring_slice, cstring.length);
+    liberror_is_negative(cstring_slice, start);
+    liberror_is_negative(cstring_slice, stop);
+
+    if(start > stop) {
+        fprintf(stderr, "cstring_slice: start (%i) cannot be larger than stop (%i)\n",
+                start, stop);
+        exit(EXIT_FAILURE);
+    }
+
+    if(start > cstring.length) {
+        fprintf(stderr, "cstring_slice: start (%i) outside of the bounds of the cstring length (%i)\n",
+                start, cstring.length);
+        exit(EXIT_FAILURE);
+    }
+
+    if(stop > cstring.length) {
+        fprintf(stderr, "cstring_slice: stop (%i) outside of the bounds of the cstring length (%i)\n",
+                stop, cstring.length);
+        exit(EXIT_FAILURE);
+    }
+
+    /*
+     * Slice a segment of a string into a new string.
+     *
+     * range: 0, 3
+     * f o o b a r b a z
+     * |---|
+     *
+     * range: 3, 6
+     * f o o b a r b a z
+     *       |---|
+     *
+     * length: (stop - start)
+     * capacity: length
+     * contents: cstring.contents + start
+     *
+     * Note: in the case of slicing, the capacity of the string will
+     * be the same as the length, as there is NOT any modification
+     * of the string during a slice, which means that
+     * slice.contents[slice.length] will NOT necessarily be a NUL byte.
+    */
+
+    slice.contents = cstring.contents + start;
+    slice.length = stop - start;
+    slice.capacity = stop - start;
+
+    return slice;
 }

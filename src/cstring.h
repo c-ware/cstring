@@ -656,4 +656,81 @@ int cstring_strips(struct CString *cstring, const char *target);
 */
 struct CString cstring_loadf(FILE *file);
 
+/*
+ * @docgen: function
+ * @brief: slice a segment of the string
+ * @name: cstring_slice
+ *
+ * @include: cstring.h
+ *
+ * @description
+ * @Slice a segment of the CString into a new CString object based off
+ * @a range of characters in the CString. The CString returned by this
+ * @function still contains the same contents buffer as the cstring
+ * @parameter, so be cautious when modifying it.
+ * @
+ * @Also, the capacity and length fields of the returned CString will
+ * @be equal. This is because we cannot confirm that there will always
+ * @be a NUL byte at the end of the capacity of the returned CString.
+ * @Because of this, using a function that expects a NUL byte will
+ * @access *outside* of the slice. In other words, the sliced CString
+ * @will NOT necessarily have a NUL byte at the end of the sliced
+ * @portion.
+ * @description
+ *
+ * @example
+ * @#include "cstring.h"
+ * @
+ * @int main(void) {
+ * @    int start = -1;
+ * @    struct CString slice;
+ * @    struct CString string_a = cstring_init("foo bar baz");
+ * @
+ * @    // Get the first word of string_a
+ * @    start = cstring_finds(string_a, " ");
+ * @    slice = cstring_slice(string_a, 0, start);
+ * @
+ * @    cstring_free(string_a);
+ * @
+ * @    return 0;
+ * @}
+ * @example
+ *
+    liberror_is_null(cstring_slice, cstring.contents);
+    liberror_is_negative(cstring_slice, cstring.length);
+    liberror_is_negative(cstring_slice, start);
+    liberror_is_negative(cstring_slice, stop);
+ *
+ * @error: cstring.contents is NULL
+ * @error: cstring.length is negative
+ * @error: start is negative
+ * @error: stop is negative
+ * @error: start is greater than stop
+ * @error: start is outside of the bounds of the cstring
+ * @error: stop is outside of the bounds of the cstring
+ *
+ * @param cstring: the cstring to slice
+ * @type: struct CString
+ *
+ * @param start: the start index
+ * @type: int
+ *
+ * @param stop: the index to stop before
+ * @type: int
+ *
+ * @return: a sliced cstring
+ * @type: struct CString
+*/
+struct CString cstring_slice(struct CString cstring, int start, int stop);
+
+
+
+
+
+
+
+
+
+
+
 #endif

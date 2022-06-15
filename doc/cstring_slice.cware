@@ -1,0 +1,86 @@
+.TH "cstring_slice" "cware" "June 15, 2022" "" "C-Ware Manuals"
+.SH NAME
+cstring_slice - slice a segment of the string
+.SH SYNOPSIS
+.B "#include ""cstring.h"""
+.br
+
+\fBstruct CString cstring_slice(struct CString \fIcstring\fB, int \fIstart\fB, int \fIstop\fB);
+.br
+
+\fR
+.SH DESCRIPTION
+Slice a segment of the CString into a new CString object based off
+a range of characters in the CString. The CString returned by this
+function still contains the same contents buffer as the cstring
+parameter, so be cautious when modifying it.
+
+Also, the capacity and length fields of the returned CString will
+be equal. This is because we cannot confirm that there will always
+be a NUL byte at the end of the capacity of the returned CString.
+Because of this, using a function that expects a NUL byte will
+access *outside* of the slice. In other words, the sliced CString
+will NOT necessarily have a NUL byte at the end of the sliced
+portion.
+
+This function will display an error to the stderr, and abort the program if any of following conditions are met.
+.RS
+o    cstring.contents is NULL
+.br
+o    cstring.length is negative
+.br
+o    start is negative
+.br
+o    stop is negative
+.br
+o    start is greater than stop
+.br
+o    start is outside of the bounds of the cstring
+.br
+o    stop is outside of the bounds of the cstring
+.br
+.RE
+
+\fIcstring\fR will be the cstring to slice
+.br
+\fIstart\fR will be the start index
+.br
+\fIstop\fR will be the index to stop before
+.br
+.SH RETURN VALUE
+This function will return a sliced cstring
+.SH NOTES
+This function has no notes.
+.SH EXAMPLES
+#include "cstring.h"
+.br
+
+.br
+int main(void) {
+.br
+    int start = -1;
+.br
+    struct CString slice;
+.br
+    struct CString string_a = cstring_init("foo bar baz");
+.br
+
+.br
+    // Get the first word of string_a
+.br
+    start = cstring_finds(string_a, " ");
+.br
+    slice = cstring_slice(string_a, 0, start);
+.br
+
+.br
+    cstring_free(string_a);
+.br
+
+.br
+    return 0;
+.br
+}
+.br
+.SH SEE ALSO
+This function has no references.

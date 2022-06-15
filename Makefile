@@ -1,5 +1,5 @@
 OBJS=./src/cstring.o 
-TESTS=./tests/find ./tests/loadf ./tests/concat ./tests/strip ./tests/finds ./tests/concats ./tests/endswiths ./tests/startswith ./tests/init ./tests/endswith ./tests/strips ./tests/startswiths 
+TESTS=./tests/find ./tests/loadf ./tests/concat ./tests/strip ./tests/finds ./tests/slice ./tests/concats ./tests/endswiths ./tests/startswith ./tests/init ./tests/endswith ./tests/strips ./tests/startswiths 
 HEADERS=./src/cstring.h ./src/liberror/liberror.h 
 CC=cc
 PREFIX=/usr/local
@@ -40,6 +40,9 @@ uninstall:
 
 ./tests/finds: ./tests/finds.c ./tests/common.h $(OBJS)
 	$(CC) ./tests/finds.c -o ./tests/finds $(OBJS) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
+
+./tests/slice: ./tests/slice.c ./tests/common.h $(OBJS)
+	$(CC) ./tests/slice.c -o ./tests/slice $(OBJS) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
 
 ./tests/concats: ./tests/concats.c ./tests/common.h $(OBJS)
 	$(CC) ./tests/concats.c -o ./tests/concats $(OBJS) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
