@@ -1,4 +1,4 @@
-.TH "cstring_find" "cware" "June 15, 2022" "" "C-Ware Manuals"
+.TH "cstring_find" "cware" "June 18, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring_find - find a cstring inside of another cstring
 .SH SYNOPSIS

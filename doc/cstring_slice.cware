@@ -1,4 +1,4 @@
-.TH "cstring_slice" "cware" "June 15, 2022" "" "C-Ware Manuals"
+.TH "cstring_slice" "cware" "June 18, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring_slice - slice a segment of the string
 .SH SYNOPSIS

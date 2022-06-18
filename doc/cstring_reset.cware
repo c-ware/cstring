@@ -1,4 +1,4 @@
-.TH "cstring_reset" "cware" "June 15, 2022" "" "C-Ware Manuals"
+.TH "cstring_reset" "cware" "June 18, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring_reset - reset a string to be reused
 .SH SYNOPSIS

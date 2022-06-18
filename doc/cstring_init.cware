@@ -1,4 +1,4 @@
-.TH "cstring_init" "cware" "June 15, 2022" "" "C-Ware Manuals"
+.TH "cstring_init" "cware" "June 18, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring_init - initialize a new cstring
 .SH SYNOPSIS

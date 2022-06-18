@@ -1,4 +1,4 @@
-.TH "cstring_strip" "cware" "June 15, 2022" "" "C-Ware Manuals"
+.TH "cstring_strip" "cware" "June 18, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring_strip - strip all occurrences of a cstring from another cstring
 .SH SYNOPSIS

@@ -1,4 +1,4 @@
-.TH "cstring_endswith" "cware" "June 15, 2022" "" "C-Ware Manuals"
+.TH "cstring_endswith" "cware" "June 18, 2022" "" "C-Ware Manuals"
 .SH NAME
 cstring_endswith - determine if a cstring ends with another cstring
 .SH SYNOPSIS
