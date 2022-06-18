@@ -134,7 +134,26 @@ struct CString {
     char *contents;
 };
 
-/* CArray integration */
+/* CArray integration
+ *
+ * It is very much worth keeping in mind that this is NOT
+ * an array of POINTERS to cstrings. This is an array of
+ * CSTRINGS. This is notable because if somebody assigns
+ * a copy of the cstring in the array to a variable, then
+ * any modifications to the variable will not carry over
+ * to the one in the array, since it is a copy. This is
+ * a problem because it will end up creating an inconsistency
+ * between the array and the variables.
+ *
+ * If you need to have behavior that carries over to the
+ * things in the array, store a pointer to the array element
+ * rather than a stack copy.
+*/
+
+#define CSTRING_TYPE    struct CString
+#define CSTRING_HEAP    1
+#define CSTRING_FREE(value) \
+    cstring_free((value))
 
 /*
  * @docgen: structure
