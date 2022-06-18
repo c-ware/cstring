@@ -28,6 +28,36 @@ char *contents; /* the characters in the string */
 
 .br
 
+\fBstruct CString cstring_init(const char *\fIbase\fB);
+.br\fR
+\fBvoid  cstring_free(struct CString \fIcstring\fB);
+.br\fR
+\fBstruct CString cstring_loadf(FILE *\fIfile\fB);
+.br\fR
+\fBvoid  cstring_reset(struct CString \fIcstring\fB);
+.br\fR
+\fBint cstring_finds(struct CString \fIhaystack\fB, const char *\fIneedle\fB);
+.br\fR
+\fBint cstring_find(struct CString \fIhaystack\fB, struct CString \fIneedle\fB);
+.br\fR
+\fBint cstring_strip(struct CString *\fIcstring\fB, struct CString \fItarget\fB);
+.br\fR
+\fBint cstring_strips(struct CString *\fIcstring\fB, struct CString \fItarget\fB);
+.br\fR
+\fBint cstring_endswiths(struct CString \fIcstring\fB, const char *\fIcheck\fB);
+.br\fR
+\fBint cstring_endswith(struct CString \fIcstring\fB, struct CString \fIcheck\fB);
+.br\fR
+\fBvoid  cstring_concats(struct CString *\fIcstring\fB, const char *\fIstring\fB);
+.br\fR
+\fBint cstring_startswiths(struct CString \fIcstring\fB, const char *\fIcheck\fB);
+.br\fR
+\fBint cstring_startswith(struct CString \fIcstring\fB, struct CString \fIcheck\fB);
+.br\fR
+\fBvoid  cstring_concat(struct CString *\fIcstring_a\fB, struct CString \fIcstring_b\fB);
+.br\fR
+\fBstruct CString cstring_slice(struct CString \fIcstring\fB, int \fIstart\fB, int \fIstop\fB);
+.br\fR
 .br
 
 .br
@@ -44,6 +74,33 @@ interopability between a cstring, and a C-style string. To achieve this,
 cstrings are NUL terminated, while also having a length field for any
 situations where the programmer may want length-prefixed strings, such as
 constant time length operations, and the need for the NUL byte in the body
-of the string.
+of the string. What follows is a list of each operation's manual, and a 
+brief description of it.
+
+.TS
+tab(;);
+l l 
+_ _ 
+l l 
+.
+Manual;Description
+cstring_init(cware);initialize a new cstring
+cstring_free(cware);release a cstring from memory
+cstring_loadf(cware);load a file (not a stream) into a cstring
+cstring_reset(cware);reset a cstring to be reused
+cstring_finds(cware);find a c-style string in a cstring
+cstring_find(cware);find a cstring in a cstring
+cstring_strip(cware);strip a cstring from a cstring
+cstring_strips(cware);stip a c-style string from a cstring
+cstring_endswiths(cware);check if a cstring ends with a c-style string
+cstring_endswith(cware);check if a cstring ends with a cstring
+cstring_concats(cware);concatenate a c-style string onto a cstring
+cstring_startswiths(cware);check if a cstring starts with a c-style string
+cstring_startswith(cware);check if a cstring starts with a cstring
+cstring_concat(cware);concatenate a cstring onto another cstring
+cstring_slice(cware);slice a range of a cstring
+.TE
+
 .SH SEE ALSO
-This project has no references.
+\fBcware\fR(cware)
+.br
