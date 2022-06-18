@@ -41,6 +41,7 @@
  * @name: cstring
  *
  * @embed structure: CString
+ * @embed structure: CStrings
  * @embed function: cstring_init
  * @embed function: cstring_free
  * @embed function: cstring_loadf
@@ -131,6 +132,28 @@ struct CString {
     int length;
     int capacity;
     char *contents;
+};
+
+/* CArray integration */
+
+/*
+ * @docgen: structure
+ * @brief: an array of cstrings-- integration with carray(cware)
+ * @name: CStrings
+ *
+ * @field length: the length of the array
+ * @type: int
+ *
+ * @field capacity: the physical capacity of the array
+ * @type: int
+ *
+ * @field contents: the strings in the array
+ * @type: struct CString *
+*/
+struct CStrings {
+    int length;
+    int capacity;
+    struct CString *contents;
 };
 
 /*

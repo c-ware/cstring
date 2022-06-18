@@ -15,11 +15,27 @@ struct CString {
 .br
 .RS  0.4i
 .br
-int length;     /* the length of the string */
+int length;               /* the length of the string */
 .br
-int capacity;   /* the physical capacity of the string */
+int capacity;             /* the physical capacity of the string */
 .br
-char *contents; /* the characters in the string */
+char *contents;           /* the characters in the string */
+.br
+.RE
+.br
+};
+.br
+/* an array of cstrings-- integration with carray(cware) */
+.br
+struct CStrings {
+.br
+.RS  0.4i
+.br
+int length;               /* the length of the array */
+.br
+int capacity;             /* the physical capacity of the array */
+.br
+struct CString *contents; /* the strings in the array */
 .br
 .RE
 .br
