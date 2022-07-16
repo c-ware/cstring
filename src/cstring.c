@@ -245,7 +245,6 @@ int cstring_startswith(struct CString cstring, struct CString check) {
 }
 
 int cstring_startswiths(struct CString cstring, const char *check) {
-    int index = 0;
     struct CString cstring_check;
 
     liberror_is_null(cstring_startswiths, cstring_string(cstring));
@@ -284,7 +283,6 @@ int cstring_endswith(struct CString cstring, struct CString check) {
 }
 
 int cstring_endswiths(struct CString cstring, const char *check) {
-    int index = 0;
     struct CString cstring_check;
 
     liberror_is_null(cstring_endswiths, cstring_string(cstring));
